@@ -1,5 +1,6 @@
     var lastClicked;
     var totalCells = 0;
+    var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
     
@@ -7,7 +8,11 @@
     {
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
-        var step = (row * col);
+
+        let step = {     // an object literal (key value pairs)
+            column: column,  
+            row: row        
+          };
         isStepOnMine(step);
     
         el.className='clicked';
@@ -24,15 +29,17 @@
     //draw grid
     function clickableGrid(rows, cols, callback)
     {
-        var i = 0;
+        var i = 1;
         var grid = document.createElement('table');
         grid.className = 'grid';
         
-        for (var r = 0; r < rows; ++r)
+        for (var r = 1; r < rows; ++r)
         {
+            totalColumns++;
             var tr = grid.appendChild(document.createElement('tr'));
-            for (var c = 0; c < cols; ++c)
+            for (var c = 1; c < cols; ++c)
             {
+                totalCells++;
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.addEventListener('click',(function(el,r,c,i){
                     return function(){
@@ -41,7 +48,6 @@
                 })(cell,r,c,i),false);
             }
         }
-        totalCells = (cols * rows);
         return grid;
     }
 
@@ -54,6 +60,15 @@
     {
         var i, minesPlanted = 0;
 
+        console.log("TotalColums : " + totalColumns);
+
+        console.log("TotalCells : " + totalCells);
+
+        var totalRows = (totalCells / totalColumns);
+
+        console.log("total rows = totalCells / totalColums : " + (totalCells / totalColumns));
+
+
         while (minesPlanted < totalMines)
         {
          var currentmineLocation = getRandomGridSquare();
@@ -64,12 +79,13 @@
     }
 
     function isStepOnMine(step) {      
-
+        console.log("Checking if you stepped on a mine");
+        console.log(step);
             function contains(mineLocations, step) {
                 console.log("user stepped on " + step);
                 for (var i = 0; i < a.length; i++) {
                     if (mineLocations[i] == step) {
-                        console.log(true);
+                        alert("Boom!");
                         return true;
                     }
                 }
