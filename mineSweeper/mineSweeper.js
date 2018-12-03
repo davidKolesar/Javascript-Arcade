@@ -1,8 +1,10 @@
     var lastClicked;
-    //get these from DOM
-    var rows, cols;
+    var totalMines;
+    var totalRows;
+    var mineLocations = [];
 
-    var grid = clickableGrid(10,10,function(el,row,col,i){
+
+        var grid = clickabd(10,10,function(el,row,col,i){
         console.log("You clicked on element:",el);
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
@@ -23,6 +25,7 @@
         
         for (var r = 0; r < rows; ++r){
             var tr = grid.appendChild(document.createElement('tr'));
+            totalRows++;
             for (var c = 0; c < cols; ++c){
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.innerHTML = ++i;
@@ -36,11 +39,19 @@
         return grid;
     }
 
-    function getRandomGridSquare(max)
+    function getRandomGridSquare(totalRows)
     {
-        return Math.floor((Math.random() * 1000) + 1) % max;
+        return Math.floor((Math.random() * 1000) + 1) % totalRows;
     }
 
-    function randomlyAssignBombs(grid) {
+    function randomlyAssignMines(mines)
+    {
+        var i, minesPlanted = 0;
 
+        while (minesPlanted < mines)
+        {
+         var currentmineLocation = getRandomGridSquare(max);
+            mineLocations = [];
+
+        }
     }
