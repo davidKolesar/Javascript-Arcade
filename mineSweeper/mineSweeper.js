@@ -9,11 +9,13 @@
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
 
-        let step = {     // an object literal (key value pairs)
+        // an object literal (key value pairs)
+        let step = {     
             column: col,  
             row: row        
           };
-        isStepOnMine(step);
+
+        var isStepOnMine = checkForMine(step);
     
         el.className='clicked';
         if (lastClicked) lastClicked.className='';
@@ -81,7 +83,8 @@
         }
     }
 
-    function isStepOnMine(step) {      
+    //checks if user stepped on mine during last turn
+    function checkForMine(step) {      
         console.log("Checking if you stepped on a mine");
         console.log(step);
         
@@ -89,9 +92,9 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
+                return true;
             }
         });
           
-
-        
+        return false;
     }

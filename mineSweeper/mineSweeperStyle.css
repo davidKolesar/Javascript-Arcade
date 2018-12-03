@@ -2,11 +2,11 @@
 .grid td {
     cursor:pointer;
     width:30px; height:30px;
-    border:1px solid #ccc;
+    border:3px solid black;
     text-align:center;
     font-family:sans-serif; font-size:13px
 }
 .grid td.clicked {
-    background-color:yellow;
+    background-color:rgb(133, 133, 131);
     font-weight:bold; color:red;
 }
