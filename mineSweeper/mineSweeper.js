@@ -10,7 +10,7 @@
         console.log("You clicked on col:",col);
 
         let step = {     // an object literal (key value pairs)
-            column: column,  
+            column: col,  
             row: row        
           };
         isStepOnMine(step);
@@ -84,15 +84,14 @@
     function isStepOnMine(step) {      
         console.log("Checking if you stepped on a mine");
         console.log(step);
-            function contains(mineLocations, step) {
-                console.log("user stepped on " + step);
-                for (var i = 0; i < a.length; i++) {
-                    if (mineLocations[i] == step) {
-                        alert("Boom!");
-                        return true;
-                    }
-                }
-                console.log(false);
-                return false;
-        }
+        
+        mineLocations.forEach(function(element) 
+        {
+            if(element.column == step.column && element.row == step.row) {
+                alert("boom!");
+            }
+        });
+          
+
+        
     }
