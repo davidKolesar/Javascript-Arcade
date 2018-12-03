@@ -3,12 +3,13 @@
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
+    var currentStep;
     
     var grid = clickableGrid(10,10,function(el,row,col,i)
     {
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
-
+        
         // an object literal (key value pairs)
         let step = {     
             column: col,  
@@ -83,6 +84,11 @@
         }
     }
 
+    function colorGrid() 
+    {
+        mineLocations[1];
+    }
+
     //checks if user stepped on mine during last turn
     function checkForMine(step) {      
         console.log("Checking if you stepped on a mine");
@@ -93,8 +99,9 @@
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
                 return true;
+            } else {
+                console.log("false");
+                return false;
             }
         });
-          
-        return false;
     }
