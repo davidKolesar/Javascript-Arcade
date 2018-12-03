@@ -29,15 +29,15 @@
     //draw grid
     function clickableGrid(rows, cols, callback)
     {
-        var i = 1;
+        var i = 0;
         var grid = document.createElement('table');
         grid.className = 'grid';
         
-        for (var r = 1; r < rows; ++r)
+        for (var r = 0; r < rows; ++r)
         {
             totalColumns++;
             var tr = grid.appendChild(document.createElement('tr'));
-            for (var c = 1; c < cols; ++c)
+            for (var c = 0; c < cols; ++c)
             {
                 totalCells++;
                 var cell = tr.appendChild(document.createElement('td'));
@@ -51,29 +51,32 @@
         return grid;
     }
 
-    function getRandomGridSquare()
+    function getRandomGridSquare(total)
     {
-        return Math.floor((Math.random() * 1000) + 1) % totalCells;
+        return Math.floor((Math.random() * 1000) + 1) % total;
     }
 
     function randomlyAssignMines(totalMines)
     {
         var i, minesPlanted = 0;
-
-        console.log("TotalColums : " + totalColumns);
-
-        console.log("TotalCells : " + totalCells);
-
         var totalRows = (totalCells / totalColumns);
 
-        console.log("total rows = totalCells / totalColums : " + (totalCells / totalColumns));
 
-
+        //drop a single mine on single column / row combination  
         while (minesPlanted < totalMines)
         {
-         var currentmineLocation = getRandomGridSquare();
-         console.log("dropping mine on " + currentmineLocation);
-         mineLocations.push(currentmineLocation);
+         var currentmineColumnLocation = getRandomGridSquare(totalColumns);
+         var currentmineRowLocation = getRandomGridSquare(totalRows);
+         console.log("dropping mine on column " + currentmineColumnLocation);
+         console.log("dropping mine on row " + currentmineRowLocation);
+
+        //hold pair in object
+        let currentMine = {
+            column: currentmineColumnLocation,  
+            row: currentmineRowLocation        
+          };
+
+         mineLocations.push(currentMine);
          minesPlanted++;
         }
     }
