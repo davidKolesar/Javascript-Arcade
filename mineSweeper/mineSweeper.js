@@ -1,11 +1,18 @@
+//4 things left to do
+//calculate mines
+//disable grid
+//flags
+//graphics / sounds
+
     var lastClicked;
     var totalCells = 0;
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
-    var currentStep;
+    
 
-    var grid = clickableGrid(10,10,function(el,row,col,i)
+    //High order function 
+    var grid = clickableGrid(10,10,function(selectedCell,row,col,i)
     {
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
@@ -17,11 +24,14 @@
           };
 
         // determines if mine was stepped on
-        var isStepOnMine = checkForMine(step);
+        checkForMine(step);
+
+        // if mine was not stepped on, calculate bordering mines of selected cell
+        calculateMineDistances(step);
     
-        el.className='clicked';
+        selectedCell.className='clicked';
         if (lastClicked) lastClicked.className='';
-        lastClicked = el;
+        lastClicked = selectedCell;
     });
   
     //creates grid in html
@@ -30,7 +40,7 @@
     //assigns mines
     randomlyAssignMines(totalMines);
 
-    //draw grid
+    //draw grid (callback function)
     function clickableGrid(rows, cols, callback)
     {
         var i = 0;
@@ -45,10 +55,10 @@
             {
                 totalCells++;
                 var cell = tr.appendChild(document.createElement('td'));
-                cell.addEventListener('click',(function(el,r,c,i){
+                cell.addEventListener('click',(function(selectedCell,r,c,i){
                     return function(){
-                        el.style.backgroundColor = "red";
-                        callback(el,r,c,i);
+                        selectedCell.style.backgroundColor = "red";
+                        callback(selectedCell,r,c,i);
                     }
                 })(cell,r,c,i),false);
             }
@@ -94,6 +104,10 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
+                if(confirm('Would you like to play again?')){
+                    window.location.reload();  
+                }
+                //reveal mines 
                 return true;
             } else {
                 console.log("false");
@@ -101,3 +115,47 @@
             }
         });
     }
+
+    function calculateMineDistances() {
+        var boarderingMines = 0;
+        for (var i = 0; i < totalMines; i++)
+            {
+                var analyzedColumn = step.column;
+                var analyzedRow = step.row;
+                
+                // search diagnal upper left
+                if((analyzedColumn -1) == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
+                    // detect mine
+                }
+                //search up
+                if(analyzedColumn == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
+                    // detect mine
+                }
+                //search diagnal upper right
+                if((analyzedColumn +1) == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
+                    // detect mine
+                }
+                //search right
+                if((analyzedColumn +1) == mineLocations.column && analyzed.row == mineLocations.row) {
+                    // detect mine
+                }
+                //search diagnal lower right
+                if((analyzedColumn +1) == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
+                    // detect mine
+                }
+
+                //search down
+                if(analyzedColumn == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
+                    // detect mine
+                }
+                //search diagnal lower left
+                if((analyzedColumn -1) == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
+                    // detect mine
+                }
+                //search left
+                if((analyzedColumn -1) == mineLocations.column && analyzed.row == mineLocations.row) {
+                    // detect mine
+                }
+            }
+    }
+    
