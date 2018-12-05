@@ -173,11 +173,17 @@
     function calculateMineDistances(analyzedColumn, analyzedRow) 
     {
         var minesObserved = 0;
+
+        //guard from checking off the grid
+        if(analyzedColumn == -1 || analyzedRow == -1){
+            minesObserved;
+        } 
+
         mineLocations.forEach(function(element) 
         {
             if(element.column == analyzedColumn && element.row == analyzedRow) 
             {
-                minesObserved ++;
+                ++minesObserved;
             } 
         });
         return minesObserved;
