@@ -80,11 +80,31 @@
         //drop a single mine on single column / row combination  
         while (minesPlanted < totalMines)
         {
+         var duplicateLocation = false;
          var currentmineColumnLocation = getRandomGridSquare(totalColumns);
          var currentmineRowLocation = getRandomGridSquare(totalRows);
-         console.log("dropping mine on column " + currentmineColumnLocation);
-         console.log("dropping mine on row " + currentmineRowLocation);
 
+            //Checking column / row combination is unique
+            mineLocations.forEach(function(element) 
+            {   
+                if(element.column == currentmineColumnLocation && element.row == currentmineRowLocation) 
+                {
+                    duplicateLocation = true;
+                } 
+            });
+            
+            if (duplicateLocation == false) 
+            {
+                console.log("dropping mine on column " + currentmineColumnLocation);
+                console.log("dropping mine on row " + currentmineRowLocation);    
+                dropMines(currentmineColumnLocation, currentmineRowLocation);
+                minesPlanted++;
+            }
+        }
+    }
+
+    function dropMines (currentmineColumnLocation, currentmineRowLocation) 
+    {
         //hold pair in object
         let currentMine = {
             column: currentmineColumnLocation,  
@@ -92,8 +112,6 @@
           };
 
          mineLocations.push(currentMine);
-         minesPlanted++;
-        }
     }
 
     //checks if user stepped on mine during last turn
