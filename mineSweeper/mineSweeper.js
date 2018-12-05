@@ -1,15 +1,20 @@
 //4 things left to do
 //calculate mines
-//disable grid
+//losing grid
 //flags
+//winner grid
 //graphics / sounds
 
+/*  MINESWEEPER (JavaScript Arcade) -- David Kolesar 2018
+    The goal of this project was to create a minesweeper game 
+    entirely in javascript without using external libraries 
+    or existing examples.
+*/
     var lastClicked;
     var totalCells = 0;
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
-    
 
     //High order function 
     var grid = clickableGrid(10,10,function(selectedCell,row,col,i)
@@ -43,6 +48,7 @@
         var i = 0;
         var grid = document.createElement('table');
         grid.className = 'grid';
+        grid.setAttribute('id', 'gameGrid');
         
         for (var r = 0; r < rows; ++r)
         {
@@ -122,6 +128,10 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
+
+                document.getElementsById('gameGrid').style.visibility = "hidden";
+                
+
                 if(confirm('Would you like to play again?')){
                     window.location.reload();  
                 }
@@ -167,8 +177,7 @@
                 console.log("total mines boardering " + boarderingMines);
 
                 return boarderingMines;
-    }
-    
+    } 
 
     function calculateMineDistances(analyzedColumn, analyzedRow) 
     {
@@ -187,4 +196,25 @@
             } 
         });
         return minesObserved;
+    }
+
+    //draw losing grid with visible mines
+    function drawLoserGrid()
+    {
+        var rows, cols = 10;
+        var i = 0;
+        //document.documentElement possibly?
+        var grid = document.getElementsByName("table");;
+        grid.className = 'loserGrid';
+        
+        for (var r = 0; r < rows; ++r)
+        {
+            var tr = grid.appendChild(document.createElement('tr'));
+            for (var c = 0; c < cols; ++c)
+            {
+                var cell = tr.appendChild(document.createElement('td'));
+                cell.style.backgroundColor = "red";
+            }
+        }
+        return grid;
     }
