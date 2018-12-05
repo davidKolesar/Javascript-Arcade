@@ -27,7 +27,7 @@
         checkForMine(step);
 
         // if mine was not stepped on, calculate bordering mines of selected cell
-        calculateMineDistances(step);
+        //searchBoarderingMines();
     
         selectedCell.className='clicked';
         if (lastClicked) lastClicked.className='';
@@ -57,7 +57,10 @@
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.addEventListener('click',(function(selectedCell,r,c,i){
                     return function(){
+                        console.log("analyzing mines boardering row " + r | "and column " + c )
+                        var boarderingMines = calculateMineDistances(r,c);
                         selectedCell.style.backgroundColor = "red";
+                        selectedCell.innerHTML = boarderingMines;
                         callback(selectedCell,r,c,i);
                     }
                 })(cell,r,c,i),false);
@@ -116,46 +119,57 @@
         });
     }
 
-    function calculateMineDistances() {
+    function searchBoarderingMines(r, c) {
         var boarderingMines = 0;
         for (var i = 0; i < totalMines; i++)
             {
-                var analyzedColumn = step.column;
-                var analyzedRow = step.row;
+                var analyzedColumn = c;
+                var analyzedRow = r;
+                
+                console.log("if " + (analyzedColumn -1) + " equals" + mineLocations.column);
+                console.log("if" + (analyzedRow -10) + " equals " +mineLocations.row);
                 
                 // search diagnal upper left
-                if((analyzedColumn -1) == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines +calculateMineDistances((analyzedColumn -1), (analyzedRow -1));
+
                 //search up
-                if(analyzedColumn == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines +calculateMineDistances((analyzedColumn), (analyzedRow -1));
+                
                 //search diagnal upper right
-                if((analyzedColumn +1) == mineLocations.column && (analyzed.row -1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn +1), (analyzedRow -1));
+                
                 //search right
-                if((analyzedColumn +1) == mineLocations.column && analyzed.row == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn +1), (analyzedRow));
+
                 //search diagnal lower right
-                if((analyzedColumn +1) == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn -1), (analyzedRow +1));
 
                 //search down
-                if(analyzedColumn == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn), (analyzedRow +1));
+            
                 //search diagnal lower left
-                if((analyzedColumn -1) == mineLocations.column && (analyzed.row +1) == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn -1), (analyzedRow +1));
+                
                 //search left
-                if((analyzedColumn -1) == mineLocations.column && analyzed.row == mineLocations.row) {
-                    // detect mine
-                }
+                boarderingMines + calculateMineDistances((analyzedColumn -1), (analyzedRow));
+
+                console.log("total mines boardering " + boarderingMines);
+
+                return boarderingMines;
             }
     }
-    
+
+    function calculateMineDistances(analyzedColumn, analyzedRow) 
+    {
+        mineLocations.forEach(function(element) 
+        {
+            if(element.column == analyzedColumn && element.row == analyzedRow) 
+            {
+                console.log("returning one")
+                return 1;
+            } else {
+                console.log("returning zero")
+                return 0;
+            }
+        });
+    }
