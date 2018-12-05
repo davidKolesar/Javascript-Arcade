@@ -4,18 +4,19 @@
     var totalMines = 10;
     var mineLocations = [];
     var currentStep;
-    
+
     var grid = clickableGrid(10,10,function(el,row,col,i)
     {
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
         
-        // an object literal (key value pairs)
+        // writes step as object literal (key value pairs)
         let step = {     
             column: col,  
             row: row        
           };
 
+        // determines if mine was stepped on
         var isStepOnMine = checkForMine(step);
     
         el.className='clicked';
@@ -46,6 +47,7 @@
                 var cell = tr.appendChild(document.createElement('td'));
                 cell.addEventListener('click',(function(el,r,c,i){
                     return function(){
+                        el.style.backgroundColor = "red";
                         callback(el,r,c,i);
                     }
                 })(cell,r,c,i),false);
@@ -64,7 +66,6 @@
         var i, minesPlanted = 0;
         var totalRows = (totalCells / totalColumns);
 
-
         //drop a single mine on single column / row combination  
         while (minesPlanted < totalMines)
         {
@@ -82,11 +83,6 @@
          mineLocations.push(currentMine);
          minesPlanted++;
         }
-    }
-
-    function colorGrid() 
-    {
-        mineLocations[1];
     }
 
     //checks if user stepped on mine during last turn
