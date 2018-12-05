@@ -25,9 +25,6 @@
 
         // determines if mine was stepped on
         checkForMine(step);
-
-        // if mine was not stepped on, calculate bordering mines of selected cell
-        //searchBoarderingMines();
     
         selectedCell.className='clicked';
         if (lastClicked) lastClicked.className='';
@@ -55,9 +52,10 @@
             {
                 totalCells++;
                 var cell = tr.appendChild(document.createElement('td'));
-                cell.addEventListener('click',(function(selectedCell,r,c,i){
-                    return function(){
-                        console.log("analyzing mines boardering row " + r | "and column " + c );
+                cell.addEventListener('click',(function(selectedCell,r,c,i)
+                {
+                    return function()
+                    {
                         var totalBoarderingMines = searchBoarderingMines(r,c);
                         selectedCell.style.backgroundColor = "red";
                         selectedCell.innerHTML = totalBoarderingMines;
@@ -126,6 +124,7 @@
                 // search diagnal upper left
                 boarderingMines  = (boarderingMines + (observedBoarderingMines = calculateMineDistances((analyzedColumn -1), (analyzedRow -1))));
 
+                 console.log("total mines boardering " + boarderingMines);
                 //search up
                 boarderingMines = (boarderingMines + (observedBoarderingMines = calculateMineDistances((analyzedColumn), (analyzedRow -1))));
                 
@@ -155,13 +154,13 @@
 
     function calculateMineDistances(analyzedColumn, analyzedRow) 
     {
+        var minesObserved = 0;
         mineLocations.forEach(function(element) 
         {
             if(element.column == analyzedColumn && element.row == analyzedRow) 
             {
-                return 1;
-            } else {
-                return 0;
-            }
+                minesObserved ++;
+            } 
         });
+        return minesObserved;
     }
