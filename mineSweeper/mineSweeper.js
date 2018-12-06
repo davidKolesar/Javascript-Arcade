@@ -49,6 +49,7 @@
         var grid = document.createElement('table');
         grid.className = 'grid';
         grid.setAttribute('id', 'gameGrid');
+        //NOT SURE IF THIS WILL WORK
         
         for (var r = 0; r < rows; ++r)
         {
@@ -129,7 +130,9 @@
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
 
-                document.getElementsById('gameGrid').style.visibility = "hidden";
+
+                ///THIS DOESN'T WORK
+                document.getElementById('gameGrid').style.visibility = "hidden";
                 
 
                 if(confirm('Would you like to play again?')){
