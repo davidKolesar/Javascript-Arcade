@@ -228,10 +228,11 @@
           for (var j = 0; j < 10; j++) {
               var td = document.createElement('td');
              
-            var isBomb = checkLoserGridForMines(i, j);
+            
 
-              if(isBomb == true) {
-                console.log('checking if cell has mine');
+              if(checkLoserGridForMines(i, j)) 
+              {
+                console.log('color cell red');
                 var loserCell = tr.appendChild(document.createElement('td'));
                 loserCell.style.backgroundColor = "red";     
               }
@@ -244,12 +245,14 @@
         body.appendChild(loserGrid)
       }
 
-     function checkLoserGridForMines(currentCellColumnLocation, currentCellRowLocation) {
-        console.log('checking if cell has mine _function_');
+     function checkLoserGridForMines(i, j) {
+        console.log(i + ' : cell column');
+        console.log(j + ' : cell Row');
         mineLocations.forEach(function(element) 
         {   
-            if(element.column == currentCellColumnLocation && element.row == currentCellRowLocation) 
+            if(element.column == i && element.row == j) 
             {
+                console.log('CELL CONTAINS MINE');
                 return true;
             } 
         });
