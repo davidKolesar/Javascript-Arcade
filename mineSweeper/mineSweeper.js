@@ -208,24 +208,49 @@
     //draw losing grid with visible mines
     function drawLoserGrid(loserGrid)
   {
+      console.log('Drawing loser grid!');
+        //Styling stuff eventually goes into CSS document
         var body = document.getElementsByTagName('body')[0];
         var loserGrid = document.createElement('table');
-        loserGrid.style.width = '30px';
-        loserGrid.style.height = '30px';
+        loserGrid.style.width = '300px';
+        loserGrid.style.height = '300px';
         loserGrid.style.border = '3px solid black';
         loserGrid.setAttribute('border', '3');
         loserGrid.style.padding = 'padding: 2px';
         loserGrid.style.margin = '1em auto'; 
         loserGrid.style.border = 'collapse'; 
+        
+        //While drawing the grid, check loserGrid for mines
+
         var tbdy = document.createElement('tbody');
         for (var i = 0; i < 10; i++) {
           var tr = document.createElement('tr');
           for (var j = 0; j < 10; j++) {
               var td = document.createElement('td');
-              tr.appendChild(td)
+             
+            var isBomb = checkLoserGridForMines(i, j);
+
+              if(isBomb == true) {
+                console.log('checking if cell has mine');
+                var loserCell = tr.appendChild(document.createElement('td'));
+                loserCell.style.backgroundColor = "red";     
+              }
+              console.log('No mine, so drawing blank loser cell');
+              tr.appendChild(td);
           }
           tbdy.appendChild(tr);
         }
         loserGrid.appendChild(tbdy);
         body.appendChild(loserGrid)
       }
+
+     function checkLoserGridForMines(currentCellColumnLocation, currentCellRowLocation) {
+        console.log('checking if cell has mine _function_');
+        mineLocations.forEach(function(element) 
+        {   
+            if(element.column == currentCellColumnLocation && element.row == currentCellRowLocation) 
+            {
+                return true;
+            } 
+        });
+     }
