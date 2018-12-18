@@ -17,7 +17,7 @@
     var mineLocations = [];
 
     //High order function 
-    var grid = clickableGrid(10,10,function(selectedCell,row,col,i)
+    var grid = clickableGrid(10,10,function(selectedCell,row,col)
     {
         console.log("You clicked on row:",row);
         console.log("You clicked on col:",col);
@@ -49,7 +49,7 @@
         var grid = document.createElement('table');
         grid.className = 'grid';
         grid.setAttribute('id', 'gameGrid');
-        //NOT SURE IF THIS WILL WORK
+        
         
         for (var r = 0; r < rows; ++r)
         {
@@ -129,12 +129,8 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
-
-
-                ///THIS DOESN'T WORK
                 document.getElementById('gameGrid').style.visibility = "hidden";
-                
-
+                declareLoserGrid();
                 if(confirm('Would you like to play again?')){
                     window.location.reload();  
                 }
@@ -200,24 +196,36 @@
         });
         return minesObserved;
     }
+    
+    function declareLoserGrid()
+    {
+        var loserGrid = document.createElement('table');
+        loserGrid.className = 'loserGrid';
+        loserGrid.setAttribute('id', 'loserGrid');
+        drawLoserGrid(loserGrid);
+    }
 
     //draw losing grid with visible mines
-    function drawLoserGrid()
-    {
-        var rows, cols = 10;
-        var i = 0;
-        //document.documentElement possibly?
-        var grid = document.getElementsByName("table");;
-        grid.className = 'loserGrid';
-        
-        for (var r = 0; r < rows; ++r)
-        {
-            var tr = grid.appendChild(document.createElement('tr'));
-            for (var c = 0; c < cols; ++c)
-            {
-                var cell = tr.appendChild(document.createElement('td'));
-                cell.style.backgroundColor = "red";
-            }
+    function drawLoserGrid(loserGrid)
+  {
+        var body = document.getElementsByTagName('body')[0];
+        var loserGrid = document.createElement('table');
+        loserGrid.style.width = '30px';
+        loserGrid.style.height = '30px';
+        loserGrid.style.border = '3px solid black';
+        loserGrid.setAttribute('border', '3');
+        loserGrid.style.padding = 'padding: 2px';
+        loserGrid.style.margin = '1em auto'; 
+        loserGrid.style.border = 'collapse'; 
+        var tbdy = document.createElement('tbody');
+        for (var i = 0; i < 10; i++) {
+          var tr = document.createElement('tr');
+          for (var j = 0; j < 10; j++) {
+              var td = document.createElement('td');
+              tr.appendChild(td)
+          }
+          tbdy.appendChild(tr);
         }
-        return grid;
-    }
+        loserGrid.appendChild(tbdy);
+        body.appendChild(loserGrid)
+      }

@@ -19,3 +19,17 @@
 .grid td.active {
     background: #000;
   }
+
+.loserGrid {margin:1em auto; border-collapse:collapse }
+
+.loserGrid td {
+    cursor:pointer;
+    width:30px; height:30px;
+    border:3px solid black;
+    text-align:center;
+    font-family:sans-serif; font-size:13px;
+}
+
+.loserGrid td { 
+    background: rgb(214, 210, 210); cursor: pointer; padding: 2px 
+}
