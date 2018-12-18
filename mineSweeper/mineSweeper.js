@@ -234,10 +234,12 @@
               {
                 console.log('color cell red');
                 var loserCell = tr.appendChild(document.createElement('td'));
-                loserCell.style.backgroundColor = "red";     
-              }
+                loserCell.style.backgroundColor = "red";  
+                tr.appendChild(td);   
+              } else {
               console.log('No mine, so drawing blank loser cell');
               tr.appendChild(td);
+              }
           }
           tbdy.appendChild(tr);
         }
