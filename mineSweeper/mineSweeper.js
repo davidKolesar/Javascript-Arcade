@@ -13,6 +13,8 @@
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
+    var checkedLocations = [];
+    populateCheckedLocations();
     createButton();
 
     //High order function 
@@ -29,6 +31,7 @@
 
         // determines if mine was stepped on
         checkForMine(step);
+        removeFromLocations(step);
     
         selectedCell.className='clicked';
         if (lastClicked) lastClicked.className='';
@@ -266,6 +269,10 @@
 
 
 
+
+
+
+
     function createButton() {
         // 1. Create the button
         button = document.createElement("button");
@@ -277,6 +284,54 @@
         
         // 3. Add event handler
         button.addEventListener ("click", function() {
-          alert("did something");
+            var remainingMines = checkForWinner();
+
+            if(remainingMines != 0) {
+                alert('There are still ' + remainingMines + ' remaining!');
+            } else {
+                alert('You win!');
+            }
         });
         }
+
+        function checkForWinner() {
+            var remainingMines = 0;
+
+            checkedLocations.forEach(function(locations){
+                mineLocations.forEach(function(element){
+                    if(element.column == locations.column && element.row == locations.row) 
+                    {
+                        remainingMines++;
+                    }
+                });
+            });
+
+            return remainingMines;
+        }
+
+        function populateCheckedLocations() {
+              //calculate possible cell within grid
+              for (var c = 0; c < 10; c++) {
+                for (var r = 0; r < 10; r++) {
+                    let availableCell = {     
+                        column: c,  
+                        row: r        
+                      };
+
+                //push into collection of locations
+                checkedLocations.push(availableCell);
+            }
+        }
+    }
+
+    function removeFromLocations(step) {
+
+        checkedLocations.forEach(function(element) 
+        {
+            if(element.column == step.column && element.row == step.row) {
+                var index = checkedLocations.indexOf(element);
+                console.log('removing element at index ' + index);
+                checkedLocations.splice(index);
+                }
+        });
+    }
