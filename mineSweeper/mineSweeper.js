@@ -66,6 +66,7 @@
                         callback(selectedCell,r,c,i);
                     }
                 })(cell,r,c,i),false);
+                
             }
         }
         return grid;
