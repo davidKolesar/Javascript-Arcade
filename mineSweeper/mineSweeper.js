@@ -1,8 +1,3 @@
-//4 things left to do
-//flags
-//winner grid
-//graphics / sounds
-
 /*  MINESWEEPER (JavaScript Arcade) -- David Kolesar 2018
     The goal of this project was to create a minesweeper game 
     entirely in javascript without using external libraries 
@@ -14,8 +9,6 @@
     var totalMines = 10;
     var mineLocations = [];
     var checkedLocations = [];
-    populateCheckedLocations();
-    createButton();
 
     //High order function 
     var grid = clickableGrid(10,10,function(selectedCell,row,col)
@@ -37,12 +30,16 @@
         if (lastClicked) lastClicked.className='';
         lastClicked = selectedCell;
     });
-  
+
+    createButton();
+
     //creates grid in html
     document.body.appendChild(grid);
 
     //assigns mines
     randomlyAssignMines(totalMines);
+
+    populateCheckedLocations();
 
     //draw grid (callback function)
     function clickableGrid(rows, cols, callback)
@@ -282,11 +279,16 @@
         });
         }
 
+        var cellsRemaining = (checkedLocations.length - 1);
+
         function checkForWinner() {
             if(checkedLocations.length != 0) {
                 alert('There are still ' + checkedLocations.length + ' remaining!');
             } else {
                 alert('You win!');
+                if(confirm('Play again?')){
+                    window.location.reload();  
+                }
             }
         }
 
@@ -303,6 +305,22 @@
                 checkedLocations.push(availableCell);
             }
         }
+
+        //removes mines from checkedLocations to ensure accurate count
+        var indicesToRemove = [];
+        checkedLocations.forEach(function(locations){
+            mineLocations.forEach(function(element){
+                if(element.column == locations.column && element.row == locations.row) 
+                {
+                    var index = checkedLocations.indexOf(locations);
+                    indicesToRemove.push(index);
+                } 
+            });
+        });
+
+        for(var i = 0; i < indicesToRemove.length; i++){
+            checkedLocations.splice(indicesToRemove[i], 1);
+        }
     }
 
     function removeFromLocations(step) {
@@ -314,16 +332,4 @@
                 checkedLocations.splice(index, 1);
                 }
         });
-
-        //removes mines from checkedLocations to ensure accurate count
-        checkedLocations.forEach(function(locations){
-            mineLocations.forEach(function(element){
-                if(element.column == locations.column && element.row == locations.row) 
-                {
-                    var index = checkedLocations.indexOf(locations);
-                    checkedLocations.splice(index, 1);
-                } 
-            });
-        });
-
     }
