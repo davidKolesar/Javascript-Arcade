@@ -124,11 +124,12 @@
         mineLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
-                alert("boom!");
-                //document.getElementById('gameGrid').style.visibility = "hidden";
+                alert("BOOM!");
                 document.getElementById("gameGrid").style.display = "none"; 
                 declareLoserGrid();
-                if(confirm('Would you like to play again?')){
+
+                if(confirm('Would you like to play again?'))
+                {
                     window.location.reload();  
                 }
                 //reveal mines 
@@ -148,7 +149,6 @@
                 // search diagnal upper left
                 boarderingMines  = (boarderingMines + (observedBoarderingMines = calculateMineDistances((analyzedColumn -1), (analyzedRow -1))));
 
-                 console.log("total mines boardering " + boarderingMines);
                 //search up
                 boarderingMines = (boarderingMines + (observedBoarderingMines = calculateMineDistances((analyzedColumn), (analyzedRow -1))));
                 
@@ -169,8 +169,6 @@
                 
                 //search left
                 boarderingMines = (boarderingMines + (observedBoarderingMines =  calculateMineDistances((analyzedColumn -1), (analyzedRow))));
-
-                console.log("total mines boardering " + boarderingMines);
 
                 return boarderingMines;
     } 
