@@ -267,12 +267,6 @@
         return containsMine;
      }
 
-
-
-
-
-
-
     function createButton() {
         // 1. Create the button
         button = document.createElement("button");
@@ -289,21 +283,8 @@
         }
 
         function checkForWinner() {
-            var remainingMines = 0;
-
-            checkedLocations.forEach(function(locations){
-                mineLocations.forEach(function(element){
-                    console.log('checking at column : ' + element.column + ' and at row '+ locations.row);
-                    if(element.column == locations.column && element.row == locations.row) 
-                    {
-                        console.log('mine detected at column : ' + element.column + ' and at row '+ locations.row);
-                        remainingMines++;
-                    }
-                });
-            });
-
-            if(remainingMines != 0) {
-                alert('There are still ' + remainingMines + ' remaining!');
+            if(checkedLocations.length != 0) {
+                alert('There are still ' + checkedLocations.length + ' remaining!');
             } else {
                 alert('You win!');
             }
@@ -325,7 +306,6 @@
     }
 
     function removeFromLocations(step) {
-
         checkedLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
@@ -334,4 +314,16 @@
                 checkedLocations.splice(index, 1);
                 }
         });
+
+        //removes mines from checkedLocations to ensure accurate count
+        checkedLocations.forEach(function(locations){
+            mineLocations.forEach(function(element){
+                if(element.column == locations.column && element.row == locations.row) 
+                {
+                    var index = checkedLocations.indexOf(locations);
+                    checkedLocations.splice(index, 1);
+                } 
+            });
+        });
+
     }
