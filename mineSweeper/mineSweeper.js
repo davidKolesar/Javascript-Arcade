@@ -220,6 +220,7 @@
         //While drawing the grid, check loserGrid for minesS
 
         var tbdy = document.createElement('tbody');
+        tbdy.style.backgroundColor = "lightgray"
         for (var i = 0; i < 10; i++) {
           var tr = document.createElement('tr');
           for (var j = 0; j < 10; j++) {
