@@ -48,7 +48,6 @@
         grid.className = 'grid';
         grid.setAttribute('id', 'gameGrid');
         
-        
         for (var r = 0; r < rows; ++r)
         {
             totalColumns++;
@@ -163,7 +162,7 @@
                 boarderingMines = (boarderingMines + (observedBoarderingMines =  calculateMineDistances((analyzedColumn), (analyzedRow +1))));
             
                 //search diagnal lower left
-                boarderingMines = (boarderingMines + (observedBoarderingMines =  calculateMineDistances((analyzedColumn -1), (analyzedRow +1))));
+                boarderingMines = (boarderingMines + (observedBoarderingMines =  calculateMineDistances((analyzedColumn +1), (analyzedRow +1))));
                 
                 //search left
                 boarderingMines = (boarderingMines + (observedBoarderingMines =  calculateMineDistances((analyzedColumn -1), (analyzedRow))));
