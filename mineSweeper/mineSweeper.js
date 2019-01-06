@@ -64,7 +64,6 @@
                     return function()
                     {
                         var totalBoarderingMines = searchBoarderingMines(r,c);
-                        selectedCell.style.backgroundColor = "red";
                         selectedCell.innerHTML = totalBoarderingMines;
                         callback(selectedCell,r,c,i);
                     }
@@ -228,15 +227,17 @@
           for (var j = 0; j < 10; j++) {
               var td = document.createElement('td');
              
+              var isMinePresent = checkLoserGridForMines(i, j);
             
-
-              if(checkLoserGridForMines(i, j)) 
+              if(isMinePresent == true) 
               {
                 console.log('color cell red');
                 var loserCell = tr.appendChild(document.createElement('td'));
                 loserCell.style.backgroundColor = "red";  
                 tr.appendChild(td);   
-              } else {
+              } 
+              else 
+              {
               console.log('No mine, so drawing blank loser cell');
               tr.appendChild(td);
               }
@@ -247,7 +248,9 @@
         body.appendChild(loserGrid)
       }
 
-     function checkLoserGridForMines(i, j) {
+     function checkLoserGridForMines(i, j) 
+    {
+        var containsMine = false;
         console.log(i + ' : cell column');
         console.log(j + ' : cell Row');
         mineLocations.forEach(function(element) 
@@ -255,7 +258,8 @@
             if(element.column == i && element.row == j) 
             {
                 console.log('CELL CONTAINS MINE');
-                return true;
-            } 
+                containsMine = true;
+            }
         });
+        return containsMine;
      }
