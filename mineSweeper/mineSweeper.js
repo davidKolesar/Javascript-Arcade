@@ -203,14 +203,12 @@
 
     //draw losing grid with visible mines
     function drawLoserGrid(loserGrid)
-  {
-      console.log('Drawing loser grid!');
-        //Styling stuff eventually goes into CSS document
+    {
+        console.log('Drawing loser grid!');
         var body = document.getElementsByTagName('body')[0];
         var loserGrid = document.createElement('table');
         
         //While drawing the grid, check loserGrid for mines
-
         var tbdy = document.createElement('tbody');
         tbdy.style.backgroundColor = "lightgray"
         for (var i = 0; i < 10; i++) {
