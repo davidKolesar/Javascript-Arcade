@@ -13,6 +13,7 @@
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
+    createButton();
 
     //High order function 
     var grid = clickableGrid(10,10,function(selectedCell,row,col)
@@ -262,3 +263,20 @@
         });
         return containsMine;
      }
+
+
+
+    function createButton() {
+        // 1. Create the button
+        button = document.createElement("button");
+           button.innerHTML = "Minefield is Secure";
+        
+        // 2. Append somewhere
+        var body = document.getElementsByTagName("body")[0];
+        body.appendChild(button);
+        
+        // 3. Add event handler
+        button.addEventListener ("click", function() {
+          alert("did something");
+        });
+        }
