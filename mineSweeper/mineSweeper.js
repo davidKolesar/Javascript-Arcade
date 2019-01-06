@@ -16,10 +16,11 @@
         console.log("You clicked on col:",col);
         
         // writes step as object literal (key value pairs)
-        let step = {     
+        let step = 
+        {     
             column: col,  
             row: row        
-          };
+        };
 
         // determines if mine was stepped on
         checkForMine(step);
@@ -35,7 +36,6 @@
     //creates grid in html
     document.body.appendChild(grid);
 
-    //assigns mines
     randomlyAssignMines(totalMines);
 
     populateCheckedLocations();
@@ -125,7 +125,8 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 alert("boom!");
-                document.getElementById('gameGrid').style.visibility = "hidden";
+                //document.getElementById('gameGrid').style.visibility = "hidden";
+                document.getElementById("gameGrid").style.display = "none"; 
                 declareLoserGrid();
                 if(confirm('Would you like to play again?')){
                     window.location.reload();  

@@ -1,4 +1,9 @@
-.grid { margin:1em auto; border-collapse:collapse }
+.grid { 
+    text-align: center;  
+    margin:1em auto;
+    border-collapse:collapse;
+     }
+
 .grid td {
     cursor:pointer;
     width:30px; height:30px;
@@ -23,10 +28,9 @@
   }
 
 table {
+    text-align: center;  
     margin:1em auto;
     border-collapse:collapse;
-    width : 1300;
-    height : 1300;
     border : 3px solid black;
     padding : 2px;
     margin : 1em auto; 
