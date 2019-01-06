@@ -284,13 +284,7 @@
         
         // 3. Add event handler
         button.addEventListener ("click", function() {
-            var remainingMines = checkForWinner();
-
-            if(remainingMines != 0) {
-                alert('There are still ' + remainingMines + ' remaining!');
-            } else {
-                alert('You win!');
-            }
+            checkForWinner();
         });
         }
 
@@ -299,14 +293,20 @@
 
             checkedLocations.forEach(function(locations){
                 mineLocations.forEach(function(element){
+                    console.log('checking at column : ' + element.column + ' and at row '+ locations.row);
                     if(element.column == locations.column && element.row == locations.row) 
                     {
+                        console.log('mine detected at column : ' + element.column + ' and at row '+ locations.row);
                         remainingMines++;
                     }
                 });
             });
 
-            return remainingMines;
+            if(remainingMines != 0) {
+                alert('There are still ' + remainingMines + ' remaining!');
+            } else {
+                alert('You win!');
+            }
         }
 
         function populateCheckedLocations() {
@@ -331,7 +331,7 @@
             if(element.column == step.column && element.row == step.row) {
                 var index = checkedLocations.indexOf(element);
                 console.log('removing element at index ' + index);
-                checkedLocations.splice(index);
+                checkedLocations.splice(index, 1);
                 }
         });
     }
