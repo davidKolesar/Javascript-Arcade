@@ -232,8 +232,7 @@
               if(isMinePresent == true) 
               {
                 console.log('color cell red');
-                var loserCell = tr.appendChild(document.createElement('td'));
-                loserCell.style.backgroundColor = "red";  
+                td.style.backgroundColor = "red";  
                 tr.appendChild(td);   
               } 
               else 
