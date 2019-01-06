@@ -1,6 +1,4 @@
 //4 things left to do
-//calculate mines
-//losing grid
 //flags
 //winner grid
 //graphics / sounds
@@ -219,7 +217,7 @@
         loserGrid.style.margin = '1em auto'; 
         loserGrid.style.border = 'collapse'; 
         
-        //While drawing the grid, check loserGrid for mines
+        //While drawing the grid, check loserGrid for minesS
 
         var tbdy = document.createElement('tbody');
         for (var i = 0; i < 10; i++) {
@@ -233,7 +231,7 @@
               {
                 console.log('color cell red');
                 td.style.backgroundColor = "red";  
-                tr.appendChild(td);   
+                tr.appendChild(td);
               } 
               else 
               {
@@ -254,7 +252,7 @@
         console.log(j + ' : cell Row');
         mineLocations.forEach(function(element) 
         {   
-            if(element.column == i && element.row == j) 
+            if(element.column == j && element.row == i) 
             {
                 console.log('CELL CONTAINS MINE');
                 containsMine = true;
