@@ -7,7 +7,7 @@
     var totalColumns = 0;
     var totalMines = 10;
     var mineLocations = [];
-    var checkedLocations = [];
+    var remainingLocations = [];
 
     //High order function 
     var grid = clickableGrid(10,10,function(selectedCell,row,col)
@@ -38,7 +38,7 @@
 
     randomlyAssignMines(totalMines);
 
-    populateCheckedLocations();
+    populateRemainingLocations();
 
     //draw grid (callback function)
     function clickableGrid(rows, cols, callback)
@@ -119,8 +119,6 @@
 
     //checks if user stepped on mine during last turn
     function checkForMine(step) {      
-        console.log("Checking if you stepped on a mine");
-        
         mineLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
@@ -219,13 +217,12 @@
             
               if(isMinePresent == true) 
               {
-                console.log('color cell red');
+                console.log('Mine present -- color cell red');
                 td.style.backgroundColor = "red";  
                 tr.appendChild(td);
               } 
               else 
               {
-              console.log('No mine, so drawing blank loser cell');
               tr.appendChild(td);
               }
           }
@@ -263,11 +260,11 @@
         });
         }
 
-        var cellsRemaining = (checkedLocations.length - 1);
+        var cellsRemaining = (remainingLocations.length - 1);
 
         function checkForWinner() {
-            if(checkedLocations.length != 0) {
-                alert('There are still ' + checkedLocations.length + ' remaining!');
+            if(remainingLocations.length != 0) {
+                alert('There are still ' + remainingLocations.length + ' remaining!');
             } else {
                 alert('You win!');
                 if(confirm('Play again?')){
@@ -276,7 +273,7 @@
             }
         }
 
-        function populateCheckedLocations() {
+        function populateRemainingLocations() {
               //calculate possible cell within grid
               for (var c = 0; c < 10; c++) {
                 for (var r = 0; r < 10; r++) {
@@ -286,33 +283,33 @@
                       };
 
                 //push into collection of locations
-                checkedLocations.push(availableCell);
+                remainingLocations.push(availableCell);
             }
         }
 
-        //removes mines from checkedLocations to ensure accurate count
+        //removes mines from remainingLocations to ensure accurate count
         var indicesToRemove = [];
-        checkedLocations.forEach(function(locations){
+        remainingLocations.forEach(function(locations){
             mineLocations.forEach(function(element){
                 if(element.column == locations.column && element.row == locations.row) 
                 {
-                    var index = checkedLocations.indexOf(locations);
+                    var index = remainingLocations.indexOf(locations);
                     indicesToRemove.push(index);
                 } 
             });
         });
 
         for(var i = 0; i < indicesToRemove.length; i++){
-            checkedLocations.splice(indicesToRemove[i], 1);
+            remainingLocations.splice(indicesToRemove[i], 1);
         }
     }
 
     function removeFromLocations(step) {
-        checkedLocations.forEach(function(element) 
+        remainingLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
-                var index = checkedLocations.indexOf(element);
-                checkedLocations.splice(index, 1);
+                var index = remainingLocations.indexOf(element);
+                remainingLocations.splice(index, 1);
                 }
         });
     }
