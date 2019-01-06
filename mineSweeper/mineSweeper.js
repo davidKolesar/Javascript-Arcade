@@ -208,15 +208,8 @@
         //Styling stuff eventually goes into CSS document
         var body = document.getElementsByTagName('body')[0];
         var loserGrid = document.createElement('table');
-        loserGrid.style.width = '300px';
-        loserGrid.style.height = '300px';
-        loserGrid.style.border = '3px solid black';
-        loserGrid.setAttribute('border', '3');
-        loserGrid.style.padding = 'padding: 2px';
-        loserGrid.style.margin = '1em auto'; 
-        loserGrid.style.border = 'collapse'; 
         
-        //While drawing the grid, check loserGrid for minesS
+        //While drawing the grid, check loserGrid for mines
 
         var tbdy = document.createElement('tbody');
         tbdy.style.backgroundColor = "lightgray"

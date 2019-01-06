@@ -13,31 +13,41 @@
 }
 
 .grid td { 
-    background: rgb(214, 210, 210); cursor: pointer; padding: 2px 
+    background: rgb(214, 210, 210); 
+    cursor: pointer; 
+    padding: 2px; 
 }
 
 .grid td.active {
     background: #000;
   }
 
-.loserGrid {margin:1em auto; border-collapse:collapse }
+table {
+    margin:1em auto;
+    border-collapse:collapse;
+    width : 1300;
+    height : 1300;
+    border : 3px solid black;
+    padding : 2px;
+    margin : 1em auto; 
+    border : collapse; 
+    }
 
-.loserGrid td {
+table td {
     cursor:pointer;
     width:30px; height:30px;
     border:3px solid black;
     text-align:center;
     font-family:sans-serif; font-size:13px;
-}
-
-.loserGrid td { 
-    background: rgb(214, 210, 210); cursor: pointer; padding: 2px 
+    background: rgb(214, 210, 210); 
+    cursor: pointer; padding: 2px; 
 }
 
 body {
     padding: 20px;
   }
-  button {
+ 
+button {
     margin-top: 20px;
     line-height: 60px;
     font-weight: bold;
