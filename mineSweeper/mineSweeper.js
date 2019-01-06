@@ -1,7 +1,6 @@
 /*  MINESWEEPER (JavaScript Arcade) -- David Kolesar 2018
     The goal of this project was to create a minesweeper game 
-    entirely in javascript without using external libraries 
-    or existing examples.
+    entirely in javascript.
 */
     var lastClicked;
     var totalCells = 0;
@@ -100,9 +99,7 @@
             });
             
             if (duplicateLocation == false) 
-            {
-                console.log("dropping mine on column " + currentmineColumnLocation);
-                console.log("dropping mine on row " + currentmineRowLocation);    
+            {  
                 dropMines(currentmineColumnLocation, currentmineRowLocation);
                 minesPlanted++;
             }
@@ -251,13 +248,10 @@
      function checkLoserGridForMines(i, j) 
     {
         var containsMine = false;
-        console.log(i + ' : cell column');
-        console.log(j + ' : cell Row');
         mineLocations.forEach(function(element) 
         {   
             if(element.column == j && element.row == i) 
             {
-                console.log('CELL CONTAINS MINE');
                 containsMine = true;
             }
         });
@@ -328,7 +322,6 @@
         {
             if(element.column == step.column && element.row == step.row) {
                 var index = checkedLocations.indexOf(element);
-                console.log('removing element at index ' + index);
                 checkedLocations.splice(index, 1);
                 }
         });
