@@ -24,14 +24,14 @@
 
         // determines if mine was stepped on
         checkForMine(step);
-        removeFromLocations(step);
+        removeFromRemainingLocations(step);
     
         selectedCell.className='clicked';
         if (lastClicked) lastClicked.className='';
         lastClicked = selectedCell;
     });
 
-    createButton();
+    initWinnerButton();
 
     //creates grid in html
     document.body.appendChild(grid);
@@ -194,11 +194,11 @@
         var loserGrid = document.createElement('table');
         loserGrid.className = 'loserGrid';
         loserGrid.setAttribute('id', 'loserGrid');
-        drawLoserGrid(loserGrid);
+        initLoserGrid(loserGrid);
     }
 
     //draw losing grid with visible mines
-    function drawLoserGrid(loserGrid)
+    function initLoserGrid(loserGrid)
     {
         console.log('Drawing loser grid!');
         var body = document.getElementsByTagName('body')[0];
@@ -244,10 +244,11 @@
         return containsMine;
      }
 
-    function createButton() {
+    function initWinnerButton() 
+    {
         // 1. Create the button
         button = document.createElement("button");
-           button.innerHTML = "Minefield is Secure";
+           button.innerHTML = "Test Minefield";
         
         // 2. Append somewhere
         var body = document.getElementsByTagName("body")[0];
@@ -257,13 +258,11 @@
         button.addEventListener ("click", function() {
             checkForWinner();
         });
-        }
-
-        var cellsRemaining = (remainingLocations.length - 1);
+    }
 
         function checkForWinner() {
             if(remainingLocations.length != 0) {
-                alert('There are still ' + remainingLocations.length + ' remaining!');
+                alert('Wait! There are still ' + remainingLocations.length + ' remaining!');
             } else {
                 alert('You win!');
                 if(confirm('Play again?')){
@@ -303,7 +302,7 @@
         }
     }
 
-    function removeFromLocations(step) {
+    function removeFromRemainingLocations(step) {
         remainingLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
