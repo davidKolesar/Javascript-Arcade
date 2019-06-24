@@ -121,9 +121,9 @@
         mineLocations.forEach(function(element) 
         {
             if(element.column == step.column && element.row == step.row) {
-                alert("BOOM!");
-                document.getElementById("gameGrid").style.display = "none"; 
                 declareLoserGrid();
+                document.getElementById("gameGrid").style.display = "none"; 
+                alert("BOOM!");
 
                 if(confirm('Would you like to play again?'))
                 {
@@ -262,7 +262,7 @@
 
         function checkForWinner() {
             if(remainingLocations.length != 0) {
-                alert('Wait! There are still ' + remainingLocations.length + ' remaining!');
+                alert('Wait! There are still ' + remainingLocations.length + ' open spaces remaining!');
             } else {
                 alert('You win!');
                 if(confirm('Play again?')){
@@ -285,7 +285,8 @@
             }
         }
 
-        //removes mines from remainingLocations to ensure accurate count
+			//TODO : Fix this
+        //removes mines from remainingLocations to ensure accurate count 
         var indicesToRemove = [];
         remainingLocations.forEach(function(locations){
             mineLocations.forEach(function(element){
